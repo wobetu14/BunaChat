@@ -2,6 +2,7 @@
 import express from 'express';
 import dotenv from 'dotenv'; 
 import path from 'path';
+import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth.route.js';
 import messageRoutes from './routes/message.route.js';
@@ -16,6 +17,7 @@ const __dirname = path.resolve();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); // re.body parser for JSON
+app.use(cookieParser()); // for parsing cookies
 
 
 app.use('/api/auth', authRoutes);
