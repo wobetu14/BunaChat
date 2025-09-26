@@ -2,14 +2,12 @@ import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
 import { toast } from "react-hot-toast";
 
-export const useAuthStore = create((set, get) => ({
-    authUser: null,
-    isCheckingAuth: true,
+export const useAuthStore = create((set) => ({
+  authUser: null,
+  isCheckingAuth: true,
 
-    isSigningUp: false,
-    isLoggingIn: false,
-
-
+  isSigningUp: false,
+  isLoggingIn: false,
 
   checkAuth: async () => {
     try {
@@ -36,7 +34,7 @@ export const useAuthStore = create((set, get) => ({
           color: "#fff",
         },
       });
-      get().connectSocket();
+      // get().connectSocket();
     } catch (error) {
       toast.error(error.response.data.message, {
         style: {
@@ -63,7 +61,7 @@ export const useAuthStore = create((set, get) => ({
           color: "#fff",
         },
       });
-      get().connectSocket();
+      // get().connectSocket();
     } catch (error) {
       toast.error(error.response.data.message, {
         style: {
@@ -79,7 +77,7 @@ export const useAuthStore = create((set, get) => ({
 
   logout: async () => {
     try {
-     await axiosInstance.post("/auth/logout");
+      await axiosInstance.post("/auth/logout");
       toast.success("Logout successfully", {
         style: {
           borderRadius: "10px",
@@ -88,8 +86,7 @@ export const useAuthStore = create((set, get) => ({
         },
       });
 
-      set({authUser:null})
-
+      set({ authUser: null });
     } catch (error) {
       toast.error(error.response.data.message, {
         style: {
@@ -99,7 +96,19 @@ export const useAuthStore = create((set, get) => ({
         },
       });
 
-      console.error("Error logging out. ", error)
-    } 
-  }
+      console.error("Error logging out. ", error);
+    }
+  },
+
+  updateProfile: async (data) => {
+    try {
+      const res = await axiosInstance.put("/auth/update-profile", data);
+      set({ authUser: res.data });
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      toast.error("Error to update profile", error)
+      console.log("Error in update profile:", error);
+      toast.error(error.response.data.message);
+    }
+  },
 }));
