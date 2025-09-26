@@ -2,7 +2,7 @@ import { sendWelcomeEmail } from "../emails/emailHandlers.js";
 import { generateToken } from "../lib/utils.js";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
-import { ENV } from "../lib/env.js";
+import cloudinary from "../lib/cloudinary.js"; 
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -115,7 +115,7 @@ export const updateProfile = async (req, res) => {
 
     const userId = req.user._id;
 
-    const uploadResponse = await cloudinary.uploader.upload(profilePic);
+    const uploadResponse = await cloudinary.uploader.upload(profilePic, {folder:"bunachat"});
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
