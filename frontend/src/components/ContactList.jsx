@@ -24,10 +24,11 @@ function ContactList() {
         >
           <div className="flex items-center gap-3">
             {/* TODO: An indicator for online and offline users. Awaiting Socket Package */}
-            <div className={`avatar ${onlineUsers.includes(contact._id) ? "online" : "offline"}`}>
+            <div className={`avatar`}>
               <div className="size-12 rounded-full">
                 <img src={contact.profilePic || "/avatar.png"} />
               </div>
+              <span className={`${onlineUsers.includes(contact._id) ? "online-indicator" : "offline-indicator"}`}></span>
             </div>
             <h4 className="text-slate-200 font-medium">{contact.fullName}</h4>
           </div>

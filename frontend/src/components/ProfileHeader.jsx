@@ -31,7 +31,7 @@ function ProfileHeader() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           {/* AVATAR */}
-          <div className="avatar online">
+          <div className="avatar">
             <button
               className="size-14 rounded-full overflow-hidden relative group"
               onClick={() => fileInputRef.current.click()}
@@ -53,6 +53,8 @@ function ProfileHeader() {
               onChange={handleImageUpload}
               className="hidden"
             />
+
+            <span className="online-indicator"></span>
           </div>
 
           {/* USERNAME & ONLINE TEXT */}

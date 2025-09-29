@@ -27,7 +27,7 @@ function ChatsList() {
           <div className="flex items-center gap-3">
             {/* TODO: An indicator for online and offline users. Awaiting Socket Package */}
            <div
-              className={`avatar ${onlineUsers.includes(chat._id) ? "online" : "offline"}`}
+              className={`avatar`}
             >
               <div className="size-12 rounded-full">
                 <img
@@ -35,6 +35,7 @@ function ChatsList() {
                   alt={chat.fullName}
                 />
               </div>
+              <span className={`${onlineUsers.includes(chat._id) ? "online-indicator" : "offline-indicator"}`}></span>
             </div>
             <h4 className="text-slate-200 font-medium truncate">
               {chat.fullName}
