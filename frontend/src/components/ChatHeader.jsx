@@ -32,7 +32,7 @@ function ChatHeader() {
               alt={selectedUser.fullName}
             />
           </div>
-          <span className={`${isOnline} ? online-indicator : offline-indicator`} ></span>
+          <span className={`${isOnline ? "online-indicator" : "offline-indicator"}`} ></span>
         </div>
 
         <div>
